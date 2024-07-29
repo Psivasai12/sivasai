@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowRight, BarChart, Zap, Shield } from "lucide-react";
+import { ArrowRight, BarChart, Zap, Shield, Quote } from "lucide-react";
 
 const Index = () => {
   const [email, setEmail] = useState("");
@@ -63,9 +63,33 @@ const Index = () => {
             description="Rest easy knowing your data is protected by industry-leading security measures."
           />
         </div>
+
+        <div className="mt-24">
+          <h2 className="text-4xl font-bold mb-12">What Our Customers Say</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <TestimonialCard
+              quote="MonsterScale transformed our business. We've seen 300% growth since implementing their solutions!"
+              name="Sarah Johnson"
+              title="CEO, TechInnovate"
+              image="/placeholder.svg"
+            />
+            <TestimonialCard
+              quote="The analytics tools are a game-changer. We now make data-driven decisions with confidence."
+              name="Michael Chen"
+              title="CTO, DataDriven Co."
+              image="/placeholder.svg"
+            />
+            <TestimonialCard
+              quote="Outstanding support team. They're always there when we need them, ensuring smooth scaling."
+              name="Emily Rodriguez"
+              title="Operations Manager, ScaleUp Inc."
+              image="/placeholder.svg"
+            />
+          </div>
+        </div>
       </main>
 
-      <footer className="bg-gray-800 text-white py-12 mt-20">
+      <footer className="bg-gray-800 text-white py-12 mt-24">
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <h3 className="text-xl font-bold mb-4">MonsterScale</h3>
@@ -110,6 +134,16 @@ const FeatureCard = ({ icon, title, description }) => (
     {icon}
     <h3 className="text-xl font-semibold mb-2">{title}</h3>
     <p>{description}</p>
+  </div>
+);
+
+const TestimonialCard = ({ quote, name, title, image }) => (
+  <div className="bg-white bg-opacity-10 p-6 rounded-lg flex flex-col items-center text-center">
+    <Quote className="h-8 w-8 mb-4 text-yellow-400" />
+    <p className="mb-4 italic">"{quote}"</p>
+    <img src={image} alt={name} className="w-16 h-16 rounded-full mb-2 mx-auto object-cover" />
+    <h4 className="font-semibold">{name}</h4>
+    <p className="text-sm text-gray-300">{title}</p>
   </div>
 );
 
