@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowRight, BarChart, Zap, Shield, Quote } from "lucide-react";
+import { ArrowRight, BarChart, Zap, Shield, Quote, Check } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Index = () => {
@@ -111,6 +111,9 @@ const Index = () => {
             />
           </div>
         </div>
+
+        <PricingSection />
+        <CompetitorComparisonSection />
       </main>
 
       <footer className="bg-gray-800 text-white py-12 mt-24">
@@ -181,6 +184,104 @@ const TestimonialCard = ({ quote, name, title, image }) => (
     <h4 className="font-semibold">{name}</h4>
     <p className="text-sm text-gray-300">{title}</p>
   </motion.div>
+);
+
+const PricingSection = () => (
+  <section className="mt-24">
+    <h2 className="text-4xl font-bold mb-12">Pricing Plans</h2>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <PricingCard
+        title="Starter"
+        price="$29"
+        features={[
+          "Basic analytics",
+          "Up to 1,000 users",
+          "Email support",
+          "1 project"
+        ]}
+      />
+      <PricingCard
+        title="Pro"
+        price="$99"
+        features={[
+          "Advanced analytics",
+          "Up to 10,000 users",
+          "Priority support",
+          "5 projects",
+          "API access"
+        ]}
+        highlighted={true}
+      />
+      <PricingCard
+        title="Enterprise"
+        price="Custom"
+        features={[
+          "Full-suite analytics",
+          "Unlimited users",
+          "24/7 dedicated support",
+          "Unlimited projects",
+          "Custom integrations"
+        ]}
+      />
+    </div>
+  </section>
+);
+
+const PricingCard = ({ title, price, features, highlighted = false }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    className={`bg-white bg-opacity-10 p-6 rounded-lg ${
+      highlighted ? "border-2 border-yellow-400" : ""
+    }`}
+  >
+    <h3 className="text-2xl font-semibold mb-4">{title}</h3>
+    <p className="text-4xl font-bold mb-6">{price}<span className="text-xl">/month</span></p>
+    <ul className="space-y-2 mb-6">
+      {features.map((feature, index) => (
+        <li key={index} className="flex items-center">
+          <Check className="h-5 w-5 mr-2 text-green-400" />
+          {feature}
+        </li>
+      ))}
+    </ul>
+    <Button className="w-full">Choose Plan</Button>
+  </motion.div>
+);
+
+const CompetitorComparisonSection = () => (
+  <section className="mt-24">
+    <h2 className="text-4xl font-bold mb-12">How We Compare</h2>
+    <div className="overflow-x-auto">
+      <table className="w-full bg-white bg-opacity-10 rounded-lg">
+        <thead>
+          <tr className="border-b border-gray-700">
+            <th className="p-4 text-left">Features</th>
+            <th className="p-4 text-center">MonsterScale</th>
+            <th className="p-4 text-center">Competitor A</th>
+            <th className="p-4 text-center">Competitor B</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ComparisonRow feature="Advanced Analytics" monsterScale={true} competitorA={true} competitorB={false} />
+          <ComparisonRow feature="Unlimited Projects" monsterScale={true} competitorA={false} competitorB={true} />
+          <ComparisonRow feature="24/7 Support" monsterScale={true} competitorA={false} competitorB={false} />
+          <ComparisonRow feature="Custom Integrations" monsterScale={true} competitorA={true} competitorB={true} />
+          <ComparisonRow feature="AI-Powered Insights" monsterScale={true} competitorA={false} competitorB={false} />
+        </tbody>
+      </table>
+    </div>
+  </section>
+);
+
+const ComparisonRow = ({ feature, monsterScale, competitorA, competitorB }) => (
+  <tr className="border-b border-gray-700">
+    <td className="p-4">{feature}</td>
+    <td className="p-4 text-center">{monsterScale ? <Check className="h-5 w-5 mx-auto text-green-400" /> : "-"}</td>
+    <td className="p-4 text-center">{competitorA ? <Check className="h-5 w-5 mx-auto text-green-400" /> : "-"}</td>
+    <td className="p-4 text-center">{competitorB ? <Check className="h-5 w-5 mx-auto text-green-400" /> : "-"}</td>
+  </tr>
 );
 
 export default Index;
