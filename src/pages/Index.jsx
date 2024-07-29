@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, BarChart, Zap, Shield, Quote, Check } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const [email, setEmail] = useState("");
@@ -246,7 +247,9 @@ const PricingCard = ({ title, price, features, highlighted = false }) => (
         </li>
       ))}
     </ul>
-    <Button className="w-full">Choose Plan</Button>
+    <Link to="/plan-selection">
+      <Button className="w-full">Choose Plan</Button>
+    </Link>
   </motion.div>
 );
 
