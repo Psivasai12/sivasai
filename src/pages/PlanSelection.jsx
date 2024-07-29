@@ -4,16 +4,34 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Check, CreditCard } from "lucide-react";
+import { Check, CreditCard, Loader2 } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 const PlanSelection = () => {
   const [selectedPlan, setSelectedPlan] = useState("pro");
+  const [isPurchasing, setIsPurchasing] = useState(false);
+  const [purchaseComplete, setPurchaseComplete] = useState(false);
+  const { toast } = useToast();
 
   const plans = [
     { id: "starter", name: "Starter", price: "$29", features: ["Basic analytics", "Up to 1,000 users", "Email support", "1 project"] },
     { id: "pro", name: "Pro", price: "$99", features: ["Advanced analytics", "Up to 10,000 users", "Priority support", "5 projects", "API access"] },
     { id: "enterprise", name: "Enterprise", price: "Custom", features: ["Full-suite analytics", "Unlimited users", "24/7 dedicated support", "Unlimited projects", "Custom integrations"] },
   ];
+
+  const handlePurchase = () => {
+    setIsPurchasing(true);
+    // Simulate API call
+    setTimeout(() => {
+      setIsPurchasing(false);
+      setPurchaseComplete(true);
+      toast({
+        title: "Purchase Successful!",
+        description: `You have successfully subscribed to the ${plans.find(p => p.id === selectedPlan).name} plan.`,
+        duration: 5000,
+      });
+    }, 2000);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-900 to-indigo-900 text-white py-12">
@@ -83,7 +101,28 @@ const PlanSelection = () => {
               </div>
             </CardContent>
             <CardFooter>
-              <Button className="w-full">Complete Purchase</Button>
+              {!purchaseComplete ? (
+                <Button 
+                  className="w-full" 
+                  onClick={handlePurchase} 
+                  disabled={isPurchasing}
+                >
+                  {isPurchasing ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Processing...
+                    </>
+                  ) : (
+                    "Complete Purchase"
+                  )}
+                </Button>
+              ) : (
+                <div className="text-center w-full">
+                  <Check className="h-6 w-6 text-green-500 mx-auto mb-2" />
+                  <p className="text-lg font-semibold">Purchase Complete!</p>
+                  <p>Thank you for choosing MonsterScale.</p>
+                </div>
+              )}
             </CardFooter>
           </Card>
         </div>
