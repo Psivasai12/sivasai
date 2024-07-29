@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, BarChart, Zap, Shield, Quote } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Index = () => {
   const [email, setEmail] = useState("");
@@ -15,7 +16,12 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-900 to-indigo-900 text-white">
-      <header className="sticky top-0 z-50 bg-purple-900 bg-opacity-90 backdrop-blur-sm shadow-md">
+      <motion.header
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="sticky top-0 z-50 bg-purple-900 bg-opacity-90 backdrop-blur-sm shadow-md"
+      >
         <nav className="container mx-auto py-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold">MonsterScale</h1>
           <div className="space-x-4">
@@ -25,14 +31,32 @@ const Index = () => {
             <Button variant="secondary">Login</Button>
           </div>
         </nav>
-      </header>
+      </motion.header>
 
       <main className="container mx-auto mt-20 text-center">
-        <h2 className="text-5xl font-bold mb-6">Unleash Your Business Potential</h2>
-        <p className="text-xl mb-8 max-w-2xl mx-auto">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-5xl font-bold mb-6"
+        >
+          Unleash Your Business Potential
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="text-xl mb-8 max-w-2xl mx-auto"
+        >
           MonsterScale helps you tame the complexities of growth and scale your business to monstrous heights.
-        </p>
-        <form onSubmit={handleSubmit} className="flex justify-center mb-12">
+        </motion.p>
+        <motion.form
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          onSubmit={handleSubmit}
+          className="flex justify-center mb-12"
+        >
           <Input
             type="email"
             placeholder="Enter your email"
@@ -44,7 +68,7 @@ const Index = () => {
           <Button type="submit">
             Get Started <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
-        </form>
+        </motion.form>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
           <FeatureCard
@@ -130,21 +154,33 @@ const Index = () => {
 };
 
 const FeatureCard = ({ icon, title, description }) => (
-  <div className="bg-white bg-opacity-10 p-6 rounded-lg">
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    whileHover={{ scale: 1.05 }}
+    className="bg-white bg-opacity-10 p-6 rounded-lg"
+  >
     {icon}
     <h3 className="text-xl font-semibold mb-2">{title}</h3>
     <p>{description}</p>
-  </div>
+  </motion.div>
 );
 
 const TestimonialCard = ({ quote, name, title, image }) => (
-  <div className="bg-white bg-opacity-10 p-6 rounded-lg flex flex-col items-center text-center">
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    whileHover={{ scale: 1.05 }}
+    className="bg-white bg-opacity-10 p-6 rounded-lg flex flex-col items-center text-center"
+  >
     <Quote className="h-8 w-8 mb-4 text-yellow-400" />
     <p className="mb-4 italic">"{quote}"</p>
     <img src={image} alt={name} className="w-16 h-16 rounded-full mb-2 mx-auto object-cover" />
     <h4 className="font-semibold">{name}</h4>
     <p className="text-sm text-gray-300">{title}</p>
-  </div>
+  </motion.div>
 );
 
 export default Index;
