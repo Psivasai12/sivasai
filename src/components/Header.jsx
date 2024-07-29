@@ -39,7 +39,9 @@ const Header = () => {
               <Button variant="secondary" onClick={handleLogout}>Logout</Button>
             </>
           ) : (
-            <Button variant="secondary" as={Link} to="/login">Login</Button>
+            <Button variant="secondary" asChild>
+              <Link to="/login">Login</Link>
+            </Button>
           )}
         </div>
       </nav>
