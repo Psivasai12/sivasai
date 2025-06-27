@@ -31,13 +31,19 @@ const Header = () => {
           <h1 className="text-2xl font-bold text-green-400">DevOps Portfolio</h1>
         </Link>
         <div className="space-x-4">
-          <Button variant="ghost" as={Link} to="/">About</Button>
+          <Button variant="ghost" asChild>
+            <Link to="/">About</Link>
+          </Button>
           <Button variant="ghost">Projects</Button>
           <Button variant="ghost">Experience</Button>
-          <Button variant="ghost">Blog</Button>
+          <Button variant="ghost" asChild>
+            <Link to="/blog">Blog</Link>
+          </Button>
           {isLoggedIn ? (
             <>
-              <Button variant="ghost" as={Link} to="/dashboard">Dashboard</Button>
+              <Button variant="ghost" asChild>
+                <Link to="/dashboard">Dashboard</Link>
+              </Button>
               <Button variant="secondary" onClick={handleLogout}>Logout</Button>
             </>
           ) : (
