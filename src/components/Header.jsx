@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -23,16 +24,17 @@ const Header = () => {
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="sticky top-0 z-50 bg-purple-900 bg-opacity-90 backdrop-blur-sm shadow-md"
+      className="sticky top-0 z-50 bg-gray-900 bg-opacity-90 backdrop-blur-sm shadow-md"
     >
       <nav className="container mx-auto py-4 flex justify-between items-center">
         <Link to="/">
-          <h1 className="text-2xl font-bold">MonsterScale</h1>
+          <h1 className="text-2xl font-bold text-green-400">DevOps Portfolio</h1>
         </Link>
         <div className="space-x-4">
-          <Button variant="ghost" as={Link} to="/">Features</Button>
-          <Button variant="ghost" as={Link} to="/plan-selection">Pricing</Button>
-          <Button variant="ghost">About</Button>
+          <Button variant="ghost" as={Link} to="/">About</Button>
+          <Button variant="ghost">Projects</Button>
+          <Button variant="ghost">Experience</Button>
+          <Button variant="ghost">Blog</Button>
           {isLoggedIn ? (
             <>
               <Button variant="ghost" as={Link} to="/dashboard">Dashboard</Button>
@@ -40,7 +42,7 @@ const Header = () => {
             </>
           ) : (
             <Button variant="secondary" asChild>
-              <Link to="/login">Login</Link>
+              <Link to="/login">Admin</Link>
             </Button>
           )}
         </div>

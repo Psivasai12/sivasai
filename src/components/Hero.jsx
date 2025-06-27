@@ -1,7 +1,8 @@
+
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Download } from "lucide-react";
 
 const Hero = ({ email, setEmail, handleSubmit }) => (
   <>
@@ -11,35 +12,41 @@ const Hero = ({ email, setEmail, handleSubmit }) => (
       transition={{ duration: 0.5, delay: 0.2 }}
       className="text-5xl font-bold mb-6"
     >
-      Unleash Your Business Potential
+      DevOps Engineer & Cloud Architect
     </motion.h2>
     <motion.p
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.4 }}
-      className="text-xl mb-8 max-w-2xl mx-auto"
+      className="text-xl mb-8 max-w-3xl mx-auto"
     >
-      MonsterScale helps you tame the complexities of growth and scale your business to monstrous heights.
+      Automating infrastructure, optimizing CI/CD pipelines, and building scalable cloud solutions. 
+      Passionate about DevOps culture, Infrastructure as Code, and continuous delivery.
     </motion.p>
-    <motion.form
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.6 }}
-      onSubmit={handleSubmit}
-      className="flex justify-center mb-12"
+      className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
     >
-      <Input
-        type="email"
-        placeholder="Enter your email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="w-64 mr-2 text-black"
-        required
-      />
-      <Button type="submit">
-        Get Started <ArrowRight className="ml-2 h-4 w-4" />
+      <Button size="lg" className="bg-green-600 hover:bg-green-700">
+        <Download className="mr-2 h-4 w-4" />
+        Download Resume
       </Button>
-    </motion.form>
+      <form onSubmit={handleSubmit} className="flex">
+        <Input
+          type="email"
+          placeholder="Get in touch via email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-64 mr-2 text-black"
+          required
+        />
+        <Button type="submit" variant="outline">
+          Contact Me <ArrowRight className="ml-2 h-4 w-4" />
+        </Button>
+      </form>
+    </motion.div>
   </>
 );
 
