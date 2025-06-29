@@ -1,3 +1,4 @@
+
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Search, ExternalLink, Calendar, User } from "lucide-react";
@@ -126,51 +127,61 @@ const Blog = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative overflow-hidden">
-      {/* Animated background elements */}
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white relative">
+      {/* Subtle animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
-        <div className="absolute top-1/3 right-1/3 w-96 h-96 bg-green-500 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse"></div>
+        <div className="absolute top-1/4 -right-32 w-64 h-64 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 -left-32 w-64 h-64 bg-gradient-to-br from-green-500/20 to-blue-500/20 rounded-full blur-3xl animate-pulse animation-delay-1000"></div>
       </div>
       
-      {/* Grid pattern overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
+      {/* Subtle dot pattern */}
+      <div className="absolute inset-0 opacity-[0.02]" style={{
+        backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)',
+        backgroundSize: '24px 24px'
+      }}></div>
       
       <div className="relative z-10">
         <Header />
         
-        <main className="container mx-auto mt-20 px-4">
+        <main className="container mx-auto mt-8 px-4 max-w-6xl">
+          {/* Page Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-12 backdrop-blur-sm bg-white/5 rounded-3xl p-8 border border-white/10 shadow-2xl"
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12 py-16"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
-              DevOps Blog
-            </h1>
-            <p className="text-xl mb-8 max-w-3xl mx-auto text-gray-300">
-              Stay updated with the latest DevOps trends, best practices, and technical insights.
-            </p>
+            <div className="backdrop-blur-xl bg-white/[0.03] rounded-2xl p-8 lg:p-12 border border-white/10 shadow-2xl">
+              <h1 className="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
+                DevOps Blog
+              </h1>
+              <p className="text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                Stay updated with the latest DevOps trends, best practices, and technical insights
+              </p>
+            </div>
           </motion.div>
 
           {/* Search Bar */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="max-w-md mx-auto mb-12"
           >
-            <div className="relative backdrop-blur-sm bg-white/10 rounded-2xl p-1 border border-white/20">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-              <Input
-                type="text"
-                placeholder="Search articles by title..."
-                value={searchTerm}
-                onChange={handleSearchChange}
-                className="pl-12 bg-transparent border-0 text-white placeholder-gray-400 focus:ring-2 focus:ring-green-400/50"
-              />
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl blur opacity-50"></div>
+              <div className="relative backdrop-blur-xl bg-white/[0.05] rounded-xl p-1 border border-white/20">
+                <div className="relative">
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                  <Input
+                    type="text"
+                    placeholder="Search articles..."
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                    className="pl-12 bg-transparent border-0 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-400/50 rounded-lg"
+                  />
+                </div>
+              </div>
             </div>
           </motion.div>
 
@@ -178,8 +189,8 @@ const Blog = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="grid gap-6 md:gap-8 mb-12"
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="space-y-6 mb-12"
           >
             {currentArticles.length > 0 ? (
               currentArticles.map((article, index) => (
@@ -189,40 +200,41 @@ const Blog = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <Card className="backdrop-blur-sm bg-white/10 border-white/20 hover:bg-white/15 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-[1.02]">
-                    <CardHeader>
-                      <CardTitle className="text-white hover:text-green-400 transition-colors">
+                  <Card className="backdrop-blur-xl bg-white/[0.03] border-white/10 hover:bg-white/[0.05] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.01] rounded-xl overflow-hidden">
+                    <CardHeader className="pb-4">
+                      <CardTitle className="text-white hover:text-blue-300 transition-colors">
                         <a
                           href={article.mediumUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 group"
+                          className="flex items-start gap-3 group text-lg lg:text-xl"
                         >
-                          {article.title}
-                          <ExternalLink className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                          <span className="flex-1">{article.title}</span>
+                          <ExternalLink className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity mt-1 text-blue-400" />
                         </a>
                       </CardTitle>
-                      <div className="flex items-center gap-4 text-sm text-gray-400">
-                        <div className="flex items-center gap-1">
+                      <div className="flex items-center gap-6 text-sm text-gray-400 pt-2">
+                        <div className="flex items-center gap-2">
                           <User className="h-3 w-3" />
-                          {article.author}
+                          <span>{article.author}</span>
                         </div>
-                        <div className="flex items-center gap-1">
+                        <div className="flex items-center gap-2">
                           <Calendar className="h-3 w-3" />
-                          {new Date(article.date).toLocaleDateString()}
+                          <span>{new Date(article.date).toLocaleDateString()}</span>
                         </div>
                       </div>
                     </CardHeader>
-                    <CardContent>
-                      <p className="text-gray-300 leading-relaxed">{article.snippet}</p>
+                    <CardContent className="pt-0">
+                      <p className="text-gray-300 leading-relaxed mb-4 text-base">{article.snippet}</p>
                       <Button
                         variant="outline"
                         size="sm"
-                        className="mt-4 border-green-400/50 text-green-400 hover:bg-green-400/20 hover:border-green-400 transition-all duration-300"
+                        className="border-blue-500/50 text-blue-400 hover:bg-blue-500/20 hover:border-blue-400 transition-all duration-300 rounded-lg"
                         asChild
                       >
-                        <a href={article.mediumUrl} target="_blank" rel="noopener noreferrer">
+                        <a href={article.mediumUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                           Read on Medium
+                          <ExternalLink className="h-3 w-3" />
                         </a>
                       </Button>
                     </CardContent>
@@ -233,11 +245,13 @@ const Blog = () => {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="text-center py-12 backdrop-blur-sm bg-white/5 rounded-3xl border border-white/10"
+                className="text-center py-16"
               >
-                <p className="text-gray-400 text-lg">
-                  No articles found matching "{searchTerm}". Try a different search term.
-                </p>
+                <div className="backdrop-blur-xl bg-white/[0.03] rounded-xl p-8 border border-white/10">
+                  <p className="text-gray-400 text-lg">
+                    No articles found matching "{searchTerm}". Try a different search term.
+                  </p>
+                </div>
               </motion.div>
             )}
           </motion.div>
@@ -247,16 +261,16 @@ const Blog = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
               className="flex justify-center mb-12"
             >
-              <div className="backdrop-blur-sm bg-white/10 rounded-2xl p-2 border border-white/20">
+              <div className="backdrop-blur-xl bg-white/[0.05] rounded-xl p-2 border border-white/20">
                 <Pagination>
                   <PaginationContent>
                     <PaginationItem>
                       <PaginationPrevious
                         onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
-                        className={currentPage === 1 ? "pointer-events-none opacity-50" : "cursor-pointer hover:bg-white/20 transition-colors"}
+                        className={currentPage === 1 ? "pointer-events-none opacity-50" : "cursor-pointer hover:bg-white/20 transition-colors text-gray-300"}
                       />
                     </PaginationItem>
                     
@@ -265,7 +279,7 @@ const Blog = () => {
                         <PaginationLink
                           onClick={() => handlePageChange(page)}
                           isActive={currentPage === page}
-                          className="cursor-pointer hover:bg-white/20 transition-colors data-[active=true]:bg-green-400/20 data-[active=true]:text-green-400"
+                          className="cursor-pointer hover:bg-white/20 transition-colors data-[active=true]:bg-blue-500/20 data-[active=true]:text-blue-400 text-gray-300"
                         >
                           {page}
                         </PaginationLink>
@@ -275,7 +289,7 @@ const Blog = () => {
                     <PaginationItem>
                       <PaginationNext
                         onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
-                        className={currentPage === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer hover:bg-white/20 transition-colors"}
+                        className={currentPage === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer hover:bg-white/20 transition-colors text-gray-300"}
                       />
                     </PaginationItem>
                   </PaginationContent>

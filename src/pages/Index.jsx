@@ -22,49 +22,91 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative overflow-hidden">
-      {/* Animated background elements */}
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white relative">
+      {/* Subtle animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-green-500 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse"></div>
+        <div className="absolute top-1/4 -right-32 w-64 h-64 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 -left-32 w-64 h-64 bg-gradient-to-br from-green-500/20 to-blue-500/20 rounded-full blur-3xl animate-pulse animation-delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-full blur-3xl animate-pulse animation-delay-2000"></div>
       </div>
       
-      {/* Grid pattern overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
+      {/* Subtle dot pattern */}
+      <div className="absolute inset-0 opacity-[0.02]" style={{
+        backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)',
+        backgroundSize: '24px 24px'
+      }}></div>
       
       <div className="relative z-10">
         <Header />
-        <main className="container mx-auto mt-20 text-center px-4">
-          <div className="backdrop-blur-sm bg-white/5 rounded-3xl p-8 mb-12 border border-white/10 shadow-2xl">
-            <Hero email={email} setEmail={setEmail} handleSubmit={handleSubmit} />
-          </div>
+        <main className="container mx-auto mt-8 px-4 max-w-7xl">
+          {/* Hero Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16 py-20"
+          >
+            <div className="backdrop-blur-xl bg-white/[0.03] rounded-2xl p-12 border border-white/10 shadow-2xl">
+              <Hero email={email} setEmail={setEmail} handleSubmit={handleSubmit} />
+            </div>
+          </motion.div>
           
-          <div className="space-y-24">
-            <div className="backdrop-blur-sm bg-white/5 rounded-3xl p-8 border border-white/10 shadow-xl">
+          {/* Content Sections */}
+          <div className="space-y-20">
+            <motion.section
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="backdrop-blur-xl bg-white/[0.02] rounded-2xl p-8 lg:p-12 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500"
+            >
               <Features />
-            </div>
+            </motion.section>
             
-            <div className="backdrop-blur-sm bg-white/5 rounded-3xl p-8 border border-white/10 shadow-xl">
+            <motion.section
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="backdrop-blur-xl bg-white/[0.02] rounded-2xl p-8 lg:p-12 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500"
+            >
               <TechStack />
-            </div>
+            </motion.section>
             
-            <div className="backdrop-blur-sm bg-white/5 rounded-3xl p-8 border border-white/10 shadow-xl">
+            <motion.section
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="backdrop-blur-xl bg-white/[0.02] rounded-2xl p-8 lg:p-12 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500"
+            >
               <Projects />
-            </div>
+            </motion.section>
             
-            <div className="backdrop-blur-sm bg-white/5 rounded-3xl p-8 border border-white/10 shadow-xl">
+            <motion.section
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+              className="backdrop-blur-xl bg-white/[0.02] rounded-2xl p-8 lg:p-12 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500"
+            >
               <Experience />
-            </div>
+            </motion.section>
             
-            <div className="backdrop-blur-sm bg-white/5 rounded-3xl p-8 border border-white/10 shadow-xl">
+            <motion.section
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="backdrop-blur-xl bg-white/[0.02] rounded-2xl p-8 lg:p-12 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500"
+            >
               <Testimonials />
-            </div>
+            </motion.section>
           </div>
         </main>
       </div>
       
-      <div className="relative z-10 mt-24">
+      <div className="relative z-10 mt-32">
         <Footer />
       </div>
     </div>
