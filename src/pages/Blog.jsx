@@ -1,4 +1,3 @@
-
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Search, ExternalLink, Calendar, User } from "lucide-react";
@@ -127,20 +126,30 @@ const Blog = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white relative">
-      {/* Subtle animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 -right-32 w-64 h-64 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 -left-32 w-64 h-64 bg-gradient-to-br from-green-500/20 to-blue-500/20 rounded-full blur-3xl animate-pulse animation-delay-1000"></div>
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Modern gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-950/50 to-slate-900"></div>
+      
+      {/* Animated mesh gradient overlay */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
+        <div className="absolute top-0 -right-4 w-72 h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
       </div>
       
-      {/* Subtle dot pattern */}
-      <div className="absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)',
-        backgroundSize: '24px 24px'
-      }}></div>
+      {/* Grid pattern overlay */}
+      <div 
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+          `,
+          backgroundSize: '50px 50px'
+        }}
+      ></div>
       
-      <div className="relative z-10">
+      <div className="relative z-10 text-white">
         <Header />
         
         <main className="container mx-auto mt-8 px-4 max-w-6xl">
@@ -151,13 +160,17 @@ const Blog = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12 py-16"
           >
-            <div className="backdrop-blur-xl bg-white/[0.03] rounded-2xl p-8 lg:p-12 border border-white/10 shadow-2xl">
-              <h1 className="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
-                DevOps Blog
-              </h1>
-              <p className="text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                Stay updated with the latest DevOps trends, best practices, and technical insights
-              </p>
+            <div className="relative">
+              {/* Glow effect behind header */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-cyan-600/20 rounded-3xl blur-3xl"></div>
+              <div className="relative backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-3xl p-8 lg:p-12 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]">
+                <h1 className="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
+                  DevOps Blog
+                </h1>
+                <p className="text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                  Stay updated with the latest DevOps trends, best practices, and technical insights
+                </p>
+              </div>
             </div>
           </motion.div>
 
@@ -168,9 +181,9 @@ const Blog = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="max-w-md mx-auto mb-12"
           >
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl blur opacity-50"></div>
-              <div className="relative backdrop-blur-xl bg-white/[0.05] rounded-xl p-1 border border-white/20">
+            <div className="relative group">
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-cyan-500/20 rounded-2xl blur opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
+              <div className="relative backdrop-blur-xl bg-white/[0.03] rounded-2xl p-1 border border-white/[0.08] shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]">
                 <div className="relative">
                   <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                   <Input
@@ -178,7 +191,7 @@ const Blog = () => {
                     placeholder="Search articles..."
                     value={searchTerm}
                     onChange={handleSearchChange}
-                    className="pl-12 bg-transparent border-0 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-400/50 rounded-lg"
+                    className="pl-12 bg-transparent border-0 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-400/50 rounded-xl"
                   />
                 </div>
               </div>
@@ -199,8 +212,10 @@ const Blog = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="relative group"
                 >
-                  <Card className="backdrop-blur-xl bg-white/[0.03] border-white/10 hover:bg-white/[0.05] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.01] rounded-xl overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-cyan-500/5 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <Card className="relative backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] hover:bg-white/[0.04] transition-all duration-300 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] hover:shadow-[0_16px_64px_0_rgba(31,38,135,0.5)] hover:scale-[1.01] rounded-2xl overflow-hidden">
                     <CardHeader className="pb-4">
                       <CardTitle className="text-white hover:text-blue-300 transition-colors">
                         <a
@@ -247,7 +262,7 @@ const Blog = () => {
                 animate={{ opacity: 1 }}
                 className="text-center py-16"
               >
-                <div className="backdrop-blur-xl bg-white/[0.03] rounded-xl p-8 border border-white/10">
+                <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-8 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]">
                   <p className="text-gray-400 text-lg">
                     No articles found matching "{searchTerm}". Try a different search term.
                   </p>
@@ -264,7 +279,7 @@ const Blog = () => {
               transition={{ duration: 0.6, delay: 0.6 }}
               className="flex justify-center mb-12"
             >
-              <div className="backdrop-blur-xl bg-white/[0.05] rounded-xl p-2 border border-white/20">
+              <div className="backdrop-blur-xl bg-white/[0.03] border border-white/[0.08] rounded-2xl p-2 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]">
                 <Pagination>
                   <PaginationContent>
                     <PaginationItem>
@@ -303,6 +318,32 @@ const Blog = () => {
       <div className="relative z-10 mt-24">
         <Footer />
       </div>
+      
+      <style jsx>{`
+        @keyframes blob {
+          0% {
+            transform: translate(0px, 0px) scale(1);
+          }
+          33% {
+            transform: translate(30px, -50px) scale(1.1);
+          }
+          66% {
+            transform: translate(-20px, 20px) scale(0.9);
+          }
+          100% {
+            transform: translate(0px, 0px) scale(1);
+          }
+        }
+        .animate-blob {
+          animation: blob 7s infinite;
+        }
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+          animation-delay: 4s;
+        }
+      `}</style>
     </div>
   );
 };
