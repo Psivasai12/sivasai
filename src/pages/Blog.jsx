@@ -1,4 +1,3 @@
-
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Search, ExternalLink, Calendar, User } from "lucide-react";
@@ -118,7 +117,7 @@ const Blog = () => {
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
-    setCurrentPage(1); // Reset to first page when searching
+    setCurrentPage(1);
   };
 
   const handlePageChange = (page) => {
@@ -127,151 +126,169 @@ const Blog = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
-      <Header />
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
+        <div className="absolute top-1/3 right-1/3 w-96 h-96 bg-green-500 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse"></div>
+      </div>
       
-      <main className="container mx-auto mt-20 px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">DevOps Blog</h1>
-          <p className="text-xl mb-8 max-w-3xl mx-auto text-gray-300">
-            Stay updated with the latest DevOps trends, best practices, and technical insights.
-          </p>
-        </motion.div>
-
-        {/* Search Bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="max-w-md mx-auto mb-12"
-        >
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-            <Input
-              type="text"
-              placeholder="Search articles by title..."
-              value={searchTerm}
-              onChange={handleSearchChange}
-              className="pl-10 bg-gray-800 border-gray-700 text-white placeholder-gray-400"
-            />
-          </div>
-        </motion.div>
-
-        {/* Articles Grid */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="grid gap-6 md:gap-8 mb-12"
-        >
-          {currentArticles.length > 0 ? (
-            currentArticles.map((article, index) => (
-              <motion.div
-                key={article.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <Card className="bg-gray-800 border-gray-700 hover:bg-gray-750 transition-colors">
-                  <CardHeader>
-                    <CardTitle className="text-white hover:text-green-400 transition-colors">
-                      <a
-                        href={article.mediumUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 group"
-                      >
-                        {article.title}
-                        <ExternalLink className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-                      </a>
-                    </CardTitle>
-                    <div className="flex items-center gap-4 text-sm text-gray-400">
-                      <div className="flex items-center gap-1">
-                        <User className="h-3 w-3" />
-                        {article.author}
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Calendar className="h-3 w-3" />
-                        {new Date(article.date).toLocaleDateString()}
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-300 leading-relaxed">{article.snippet}</p>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="mt-4 border-green-600 text-green-400 hover:bg-green-600 hover:text-white"
-                      asChild
-                    >
-                      <a href={article.mediumUrl} target="_blank" rel="noopener noreferrer">
-                        Read on Medium
-                      </a>
-                    </Button>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))
-          ) : (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-12"
-            >
-              <p className="text-gray-400 text-lg">
-                No articles found matching "{searchTerm}". Try a different search term.
-              </p>
-            </motion.div>
-          )}
-        </motion.div>
-
-        {/* Pagination */}
-        {totalPages > 1 && (
+      {/* Grid pattern overlay */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
+      
+      <div className="relative z-10">
+        <Header />
+        
+        <main className="container mx-auto mt-20 px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="flex justify-center mb-12"
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12 backdrop-blur-sm bg-white/5 rounded-3xl p-8 border border-white/10 shadow-2xl"
           >
-            <Pagination>
-              <PaginationContent>
-                <PaginationItem>
-                  <PaginationPrevious
-                    onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
-                    className={currentPage === 1 ? "pointer-events-none opacity-50" : "cursor-pointer hover:bg-gray-700"}
-                  />
-                </PaginationItem>
-                
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                  <PaginationItem key={page}>
-                    <PaginationLink
-                      onClick={() => handlePageChange(page)}
-                      isActive={currentPage === page}
-                      className="cursor-pointer hover:bg-gray-700"
-                    >
-                      {page}
-                    </PaginationLink>
-                  </PaginationItem>
-                ))}
-                
-                <PaginationItem>
-                  <PaginationNext
-                    onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
-                    className={currentPage === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer hover:bg-gray-700"}
-                  />
-                </PaginationItem>
-              </PaginationContent>
-            </Pagination>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+              DevOps Blog
+            </h1>
+            <p className="text-xl mb-8 max-w-3xl mx-auto text-gray-300">
+              Stay updated with the latest DevOps trends, best practices, and technical insights.
+            </p>
           </motion.div>
-        )}
-      </main>
 
-      <Footer />
+          {/* Search Bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="max-w-md mx-auto mb-12"
+          >
+            <div className="relative backdrop-blur-sm bg-white/10 rounded-2xl p-1 border border-white/20">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <Input
+                type="text"
+                placeholder="Search articles by title..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+                className="pl-12 bg-transparent border-0 text-white placeholder-gray-400 focus:ring-2 focus:ring-green-400/50"
+              />
+            </div>
+          </motion.div>
+
+          {/* Articles Grid */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="grid gap-6 md:gap-8 mb-12"
+          >
+            {currentArticles.length > 0 ? (
+              currentArticles.map((article, index) => (
+                <motion.div
+                  key={article.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <Card className="backdrop-blur-sm bg-white/10 border-white/20 hover:bg-white/15 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-[1.02]">
+                    <CardHeader>
+                      <CardTitle className="text-white hover:text-green-400 transition-colors">
+                        <a
+                          href={article.mediumUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 group"
+                        >
+                          {article.title}
+                          <ExternalLink className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </a>
+                      </CardTitle>
+                      <div className="flex items-center gap-4 text-sm text-gray-400">
+                        <div className="flex items-center gap-1">
+                          <User className="h-3 w-3" />
+                          {article.author}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Calendar className="h-3 w-3" />
+                          {new Date(article.date).toLocaleDateString()}
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-gray-300 leading-relaxed">{article.snippet}</p>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="mt-4 border-green-400/50 text-green-400 hover:bg-green-400/20 hover:border-green-400 transition-all duration-300"
+                        asChild
+                      >
+                        <a href={article.mediumUrl} target="_blank" rel="noopener noreferrer">
+                          Read on Medium
+                        </a>
+                      </Button>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))
+            ) : (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-center py-12 backdrop-blur-sm bg-white/5 rounded-3xl border border-white/10"
+              >
+                <p className="text-gray-400 text-lg">
+                  No articles found matching "{searchTerm}". Try a different search term.
+                </p>
+              </motion.div>
+            )}
+          </motion.div>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="flex justify-center mb-12"
+            >
+              <div className="backdrop-blur-sm bg-white/10 rounded-2xl p-2 border border-white/20">
+                <Pagination>
+                  <PaginationContent>
+                    <PaginationItem>
+                      <PaginationPrevious
+                        onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+                        className={currentPage === 1 ? "pointer-events-none opacity-50" : "cursor-pointer hover:bg-white/20 transition-colors"}
+                      />
+                    </PaginationItem>
+                    
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                      <PaginationItem key={page}>
+                        <PaginationLink
+                          onClick={() => handlePageChange(page)}
+                          isActive={currentPage === page}
+                          className="cursor-pointer hover:bg-white/20 transition-colors data-[active=true]:bg-green-400/20 data-[active=true]:text-green-400"
+                        >
+                          {page}
+                        </PaginationLink>
+                      </PaginationItem>
+                    ))}
+                    
+                    <PaginationItem>
+                      <PaginationNext
+                        onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
+                        className={currentPage === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer hover:bg-white/20 transition-colors"}
+                      />
+                    </PaginationItem>
+                  </PaginationContent>
+                </Pagination>
+              </div>
+            </motion.div>
+          )}
+        </main>
+      </div>
+
+      <div className="relative z-10 mt-24">
+        <Footer />
+      </div>
     </div>
   );
 };
