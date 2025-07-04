@@ -132,7 +132,7 @@ const Index = () => {
                 className="relative backdrop-blur-xl bg-gradient-to-br from-white/[0.08] via-white/[0.05] to-white/[0.02] border border-white/20 rounded-3xl p-12 shadow-[0_20px_80px_0_rgba(0,0,0,0.3)] hover:shadow-[0_30px_100px_0_rgba(59,130,246,0.15)] transition-all duration-700"
               >
                 <Hero email={email} setEmail={setEmail} handleSubmit={handleSubmit} />
-              </div>
+              </motion.div>
             </div>
           </motion.div>
           
