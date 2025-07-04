@@ -12,38 +12,38 @@ const TechStack = () => {
   ];
 
   return (
-    <section className="mt-16">
+    <section className="mt-20">
       <motion.h3 
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent"
+        className="text-5xl font-bold text-center mb-20 bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent"
       >
         Technology Stack
       </motion.h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {technologies.map((tech, index) => (
           <motion.div
             key={tech.category}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
             viewport={{ once: true }}
-            whileHover={{ scale: 1.02, y: -5 }}
+            whileHover={{ scale: 1.03, y: -8 }}
             className="relative group"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-            <div className="relative backdrop-blur-sm bg-gradient-to-br from-white/[0.12] to-white/[0.06] p-8 rounded-2xl border border-white/20 shadow-xl hover:shadow-cyan-500/20 transition-all duration-300">
-              <h4 className="text-2xl font-bold mb-6 bg-gradient-to-r from-cyan-300 to-purple-300 bg-clip-text text-transparent">
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/8 via-purple-500/12 to-pink-500/8 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+            <div className="relative backdrop-blur-xl bg-gradient-to-br from-white/[0.15] to-white/[0.08] p-10 rounded-3xl border border-white/25 shadow-[0_20px_60px_0_rgba(0,0,0,0.15)] hover:shadow-[0_30px_80px_0_rgba(6,182,212,0.12)] transition-all duration-500 hover:border-white/40">
+              <h4 className="text-2xl font-bold mb-8 bg-gradient-to-r from-cyan-300 to-purple-300 bg-clip-text text-transparent">
                 {tech.category}
               </h4>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-4">
                 {tech.items.map((item) => (
                   <motion.span
                     key={item}
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    className="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-cyan-200 px-4 py-2 rounded-xl text-sm font-medium border border-cyan-400/30 hover:border-cyan-400/50 transition-all duration-300 cursor-default"
+                    whileHover={{ scale: 1.1, y: -3 }}
+                    className="bg-gradient-to-r from-cyan-500/15 to-purple-500/15 text-cyan-200 px-5 py-3 rounded-xl text-sm font-medium border border-cyan-400/25 hover:border-cyan-400/50 transition-all duration-300 cursor-default backdrop-blur-sm shadow-lg hover:shadow-cyan-400/20"
                   >
                     {item}
                   </motion.span>
