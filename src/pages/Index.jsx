@@ -22,35 +22,39 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* Modern gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-950/50 to-slate-900"></div>
+      {/* Dynamic gradient background */}
+      <div className="fixed inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800"></div>
       
-      {/* Animated mesh gradient overlay */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
-        <div className="absolute top-0 -right-4 w-72 h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
+      {/* Animated gradient overlays */}
+      <div className="fixed inset-0">
+        <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-r from-cyan-400/30 to-blue-500/30 rounded-full filter blur-3xl animate-pulse"></div>
+        <div className="absolute top-40 right-20 w-80 h-80 bg-gradient-to-r from-purple-400/25 to-pink-500/25 rounded-full filter blur-3xl animate-pulse animation-delay-2000"></div>
+        <div className="absolute bottom-20 left-1/3 w-72 h-72 bg-gradient-to-r from-emerald-400/20 to-cyan-500/20 rounded-full filter blur-3xl animate-pulse animation-delay-4000"></div>
       </div>
       
-      {/* Grid pattern overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
-          `,
-          backgroundSize: '50px 50px'
-        }}
-      ></div>
-      
-      {/* Noise texture */}
-      <div 
-        className="absolute inset-0 opacity-[0.015]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
-        }}
-      ></div>
+      {/* Floating particles */}
+      <div className="fixed inset-0 pointer-events-none">
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-white/20 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              opacity: [0.2, 0.8, 0.2],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 4 + Math.random() * 2,
+              repeat: Infinity,
+              delay: i * 0.5,
+            }}
+          />
+        ))}
+      </div>
       
       <div className="relative z-10 text-white">
         <Header />
@@ -58,83 +62,83 @@ const Index = () => {
         <main className="container mx-auto mt-8 px-4 max-w-7xl">
           {/* Hero Section */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16 py-20"
+            className="text-center mb-20 py-20"
           >
             <div className="relative">
-              {/* Glow effect behind hero */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-cyan-600/20 rounded-3xl blur-3xl"></div>
-              <div className="relative backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-3xl p-12 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]">
+              {/* Hero glow */}
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-3xl blur-2xl"></div>
+              <div className="relative backdrop-blur-sm bg-white/[0.05] border border-white/10 rounded-3xl p-12 shadow-2xl">
                 <Hero email={email} setEmail={setEmail} handleSubmit={handleSubmit} />
               </div>
             </div>
           </motion.div>
           
           {/* Content Sections */}
-          <div className="space-y-20">
+          <div className="space-y-16">
             <motion.section
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="relative group"
+              className="relative"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-600/10 via-blue-600/10 to-purple-600/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-3xl p-8 lg:p-12 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] hover:shadow-[0_16px_64px_0_rgba(31,38,135,0.5)] transition-all duration-500">
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 via-cyan-500/10 to-blue-500/10 rounded-3xl blur-xl"></div>
+              <div className="relative backdrop-blur-sm bg-gradient-to-br from-white/[0.08] to-white/[0.03] border border-white/10 rounded-3xl p-8 lg:p-12 shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500">
                 <Features />
               </div>
             </motion.section>
             
             <motion.section
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
               viewport={{ once: true }}
-              className="relative group"
+              className="relative"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-600/10 via-purple-600/10 to-pink-600/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-3xl p-8 lg:p-12 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] hover:shadow-[0_16px_64px_0_rgba(31,38,135,0.5)] transition-all duration-500">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-red-500/10 rounded-3xl blur-xl"></div>
+              <div className="relative backdrop-blur-sm bg-gradient-to-br from-white/[0.08] to-white/[0.03] border border-white/10 rounded-3xl p-8 lg:p-12 shadow-2xl hover:shadow-purple-500/10 transition-all duration-500">
                 <TechStack />
               </div>
             </motion.section>
             
             <motion.section
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
-              className="relative group"
+              className="relative"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-600/10 via-red-600/10 to-pink-600/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-3xl p-8 lg:p-12 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] hover:shadow-[0_16px_64px_0_rgba(31,38,135,0.5)] transition-all duration-500">
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 via-yellow-500/10 to-red-500/10 rounded-3xl blur-xl"></div>
+              <div className="relative backdrop-blur-sm bg-gradient-to-br from-white/[0.08] to-white/[0.03] border border-white/10 rounded-3xl p-8 lg:p-12 shadow-2xl hover:shadow-orange-500/10 transition-all duration-500">
                 <Projects />
               </div>
             </motion.section>
             
             <motion.section
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
               viewport={{ once: true }}
-              className="relative group"
+              className="relative"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/10 via-purple-600/10 to-blue-600/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-3xl p-8 lg:p-12 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] hover:shadow-[0_16px_64px_0_rgba(31,38,135,0.5)] transition-all duration-500">
+              <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 via-blue-500/10 to-cyan-500/10 rounded-3xl blur-xl"></div>
+              <div className="relative backdrop-blur-sm bg-gradient-to-br from-white/[0.08] to-white/[0.03] border border-white/10 rounded-3xl p-8 lg:p-12 shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500">
                 <Experience />
               </div>
             </motion.section>
             
             <motion.section
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
               viewport={{ once: true }}
-              className="relative group"
+              className="relative"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-teal-600/10 via-green-600/10 to-emerald-600/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-3xl p-8 lg:p-12 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] hover:shadow-[0_16px_64px_0_rgba(31,38,135,0.5)] transition-all duration-500">
+              <div className="absolute inset-0 bg-gradient-to-r from-teal-500/10 via-green-500/10 to-emerald-500/10 rounded-3xl blur-xl"></div>
+              <div className="relative backdrop-blur-sm bg-gradient-to-br from-white/[0.08] to-white/[0.03] border border-white/10 rounded-3xl p-8 lg:p-12 shadow-2xl hover:shadow-teal-500/10 transition-all duration-500">
                 <Testimonials />
               </div>
             </motion.section>
@@ -147,23 +151,6 @@ const Index = () => {
       </div>
       
       <style jsx>{`
-        @keyframes blob {
-          0% {
-            transform: translate(0px, 0px) scale(1);
-          }
-          33% {
-            transform: translate(30px, -50px) scale(1.1);
-          }
-          66% {
-            transform: translate(-20px, 20px) scale(0.9);
-          }
-          100% {
-            transform: translate(0px, 0px) scale(1);
-          }
-        }
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
         .animation-delay-2000 {
           animation-delay: 2s;
         }
